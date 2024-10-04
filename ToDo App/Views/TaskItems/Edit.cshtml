@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body>
+
+    @model ToDo_App.Models.TaskItem
+
+    @{
+        ViewData["Title"] = "Edit";
+    }
+
+    <h1 class="text-3xl font-medium mb-2">Edit</h1>
+
+    <hr class="w-25">
+    <div class="row  pt-8 pb-3">
+
+        <div class="col-md-4">
+            <form asp-action="Edit" asp-route-id="@Model.SNo">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <input type="hidden" asp-for="SNo" />
+
+                <div class="form-group mb-4">
+                    <label asp-for="Title" class="control-label text-2xl pb-2"></label>
+                    <input asp-for="Title" class="form-control w-75 rounded-lg">
+                    <span asp-validation-for="Title" class="text-danger"></span>
+                </div>
+
+                <div class="form-group form-check mb-4">
+                    <label class="form-check-label">
+                        <input class="form-check-input" asp-for="IsCompleted" /> Mark if Done
+                    </label>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Time" class="control-label mb-2">Set Time</label>
+                    <input type="time" asp-for="Time" class="form-control w-75">
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Date" class="control-label mb-2">Set Date</label>
+                    <input type="date" asp-for="Date" class="form-control w-75">
+                </div>
+
+                <div class="form-group mb-4">
+                    <label asp-for="Description" class="control-label mb-2">Add Description</label>
+                    <textarea cols="45" rows="3" asp-for="Description" class="form-control" style="width: auto;"></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary px-4" />
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+
+
+    <div>
+        <a asp-action="Index" class="block no-underline">
+            <div class="bg-black text-white rounded-md w-full inline text-center hover:text-yellow-300 px-3 py-2">
+                Back to List
+            </div>
+        </a>
+    </div>
+
+    @section Scripts {
+        @{
+            await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        }
+    }
+
+</body>
+</html>
